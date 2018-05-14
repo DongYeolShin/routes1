@@ -4,8 +4,8 @@ import {
   Headers,
   RequestOptions
 } from '@angular/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/Rx';
 
 import { environment } from '../environments/environment';
 
@@ -36,7 +36,9 @@ export class SpotifyService {
       headers: headers
     });
 
-    return this.http.request(queryURL, options).pipe(map(res => res.json()));
+    return this.http
+      .request(queryURL, options)
+      .map((res: any) => res.json());;
   }
 
   search(query: string, type: string): Observable<any[]> {
